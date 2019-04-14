@@ -14,7 +14,7 @@ app.listen(process.env.PORT || 1337, () => {
 });
 
 const acess_token = "EAAglqOdqcvIBALqeHRAFohZCpM9uIELqH4Rk6wgFrcTZCqGQHB85K1kA6OTfGYYmuhF5Dydc5EokZCjV0Spja6ZBoJL00X1IvU4rIJcVArmAB6Mdm3lPFjZCqmSW1I3ugZAjijC4pcBBNKBE1JkXnZCfnPRrQU7fKGntu8N5SjRZCwZDZD"; 
-let messages = "";
+let messages = "null string";
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
@@ -71,5 +71,5 @@ app.get('/webhook', (req, res) => {
   });	
   
   app.get("/", function (req, res) {
-    res.send(Date.now() + "<br>" + messages);
+    res.send(Date.now() + "<br>" + JSON.stringify(messages));
   });
