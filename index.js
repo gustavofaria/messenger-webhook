@@ -9,6 +9,8 @@ const
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+
+let messages = "";
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
@@ -24,6 +26,7 @@ app.post('/webhook', (req, res) => {
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0];
         console.log(webhook_event);
+        messages += webhook_event + "\n";
       });
   
       // Returns a '200 OK' response to all requests
@@ -64,5 +67,5 @@ app.get('/webhook', (req, res) => {
   });	
   
   app.get("/", function (req, res) {
-    res.send("Deployed!");
+    res.send(messages);
   });
