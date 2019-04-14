@@ -5,9 +5,13 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-
+let now;
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => {
+  console.log('webhook is listening');
+  now = Date.now();
+  console.log(now);
+});
 
 const acess_token = "EAAglqOdqcvIBALqeHRAFohZCpM9uIELqH4Rk6wgFrcTZCqGQHB85K1kA6OTfGYYmuhF5Dydc5EokZCjV0Spja6ZBoJL00X1IvU4rIJcVArmAB6Mdm3lPFjZCqmSW1I3ugZAjijC4pcBBNKBE1JkXnZCfnPRrQU7fKGntu8N5SjRZCwZDZD"; 
 let messages = "";
@@ -25,7 +29,7 @@ app.post('/webhook', (req, res) => {
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0].message;
-        console.log(webhook_event);
+        console.log("evento recebido" + webhook_event);
         messages += webhook_event + "<br>";
       });
   
@@ -67,5 +71,5 @@ app.get('/webhook', (req, res) => {
   });	
   
   app.get("/", function (req, res) {
-    res.send(messages);
+    res.send(Date.now() + "<br>" + messages);
   });
