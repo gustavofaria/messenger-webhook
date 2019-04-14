@@ -1,0 +1,28 @@
+{
+  "name": "messenger-webhook",
+  "version": "1.0.0",
+  "description": "messenger webhook from getting started tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavofaria/messenger-webhook.git"
+  },
+  "keywords": [
+    "ia",
+    "ie",
+    "e-duca"
+  ],
+  "author": "Gustavo Faria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavofaria/messenger-webhook/issues"
+  },
+  "homepage": "https://github.com/gustavofaria/messenger-webhook#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
