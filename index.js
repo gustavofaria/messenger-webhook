@@ -24,13 +24,13 @@ app.post('/webhook', (req, res) => {
   
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-  
+      let webhook_event;
       // Iterates over each entry - there may be multiple if batched
       body.entry.forEach(function(entry) {
   
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
-        var webhook_event = entry.messaging[0];
+        webhook_event = entry.messaging[0];
         let timestamp = new Date();
         messages += "[" + timestamp.getHours() + " : " + timestamp.getMinutes() + " : "
           + timestamp.getSeconds() + "] " + webhook_event.message.text + "<br>";
