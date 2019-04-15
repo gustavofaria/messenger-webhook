@@ -4,7 +4,8 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+  app = express().use(bodyParser.json()), // creates express http server
+  axios = require('axios');
 let now;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => {
@@ -29,14 +30,33 @@ app.post('/webhook', (req, res) => {
   
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
-        let webhook_event = entry.messaging[0].message.text;
+        let webhook_event = entry.messaging[0];
        let timestamp = new Date();
         messages += "[" + timestamp.getHours() + " : " + timestamp.getMinutes() + " : "
-          + timestamp.getSeconds() + "] " + webhook_event + "<br>";
+          + timestamp.getSeconds() + "] " + webhook_event.message.text + "<br>";
       });
   
       // Returns a '200 OK' response to all requests
       res.status(200).send('EVENT_RECEIVED');
+      axios.post('ttps://graph.facebook.com/v3.2/me/messages?access_token=' + acess_token,
+      {
+        
+          "messaging_type": "RESPONSE",
+          "recipient": {
+            "id": webhook_event.sender.id
+          },
+          "message": {
+            "text": "hello, world!"
+          }
+      },"Content-Type: application/json")
+      .then((res) => {
+        console.log(`statusCode: ${res.statusCode}`)
+        console.log(res)
+      })
+      .catch((error) => {
+        console.error(error)
+      });
+
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
