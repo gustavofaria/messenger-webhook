@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
   
       // Returns a '200 OK' response to all requests
       res.status(200).send('EVENT_RECEIVED');
-      axios.post('ttps://graph.facebook.com/v3.2/me/messages?access_token=' + acess_token,
+      axios.post('https://graph.facebook.com/v3.2/me/messages?access_token=' + acess_token,
       {
         
           "messaging_type": "RESPONSE",
