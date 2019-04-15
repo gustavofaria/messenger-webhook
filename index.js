@@ -8,14 +8,14 @@ const
 let now;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => {
-  date = new Date();
+ let date = new Date();
   now = ("[" + date.getHours() + " : " + date.getMinutes() + " : "
     + date.getSeconds() + "]");
     console.log('webhook is listening');
 });
 
 const acess_token = "EAAglqOdqcvIBALqeHRAFohZCpM9uIELqH4Rk6wgFrcTZCqGQHB85K1kA6OTfGYYmuhF5Dydc5EokZCjV0Spja6ZBoJL00X1IvU4rIJcVArmAB6Mdm3lPFjZCqmSW1I3ugZAjijC4pcBBNKBE1JkXnZCfnPRrQU7fKGntu8N5SjRZCwZDZD"; 
-let messages = "null string";
+let messages = "";
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
@@ -30,9 +30,9 @@ app.post('/webhook', (req, res) => {
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0].message.text;
-       let now = new Date();
-        messages += "[" + now.getHours() + " : " + now.getMinutes() + " : "
-          + now.getSeconds() + "] " + webhook_event + "<br>";
+       let timestamp = new Date();
+        messages += "[" + timestamp.getHours() + " : " + timestamp.getMinutes() + " : "
+          + timestamp.getSeconds() + "] " + webhook_event + "<br>";
       });
   
       // Returns a '200 OK' response to all requests
